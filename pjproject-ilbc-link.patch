@@ -1,0 +1,12 @@
+diff -dur pjproject-217740d99457fc8492d3a68f90fa25a52bd8eca9.orig/third_party/build/ilbc/Makefile pjproject-217740d99457fc8492d3a68f90fa25a52bd8eca9/third_party/build/ilbc/Makefile
+--- pjproject-217740d99457fc8492d3a68f90fa25a52bd8eca9.orig/third_party/build/ilbc/Makefile	2013-11-14 22:24:47.000000000 +0100
++++ pjproject-217740d99457fc8492d3a68f90fa25a52bd8eca9/third_party/build/ilbc/Makefile	2014-01-07 13:48:03.000000000 +0100
+@@ -13,6 +13,8 @@
+ export ILBC_SHLIB := $(ILBC_SONAME).$(PJ_VERSION_MAJOR)
+ endif
+ 
++export ILBC_LDFLAGS += -lm
++
+ ###############################################################################
+ # Gather all flags.
+ #
