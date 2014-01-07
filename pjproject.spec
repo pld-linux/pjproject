@@ -25,7 +25,7 @@
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
 Version:	2.1.0_digium_%{snap_ts}
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://github.com/asterisk/pjproject/archive/%{snap_hash}.tar.gz
