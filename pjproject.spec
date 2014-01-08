@@ -12,8 +12,9 @@
 
 # Conditional build:
 %bcond_without	sound		# disable sound support (recommended by AST wiki)
-%bcond_with	resample	# disable resample support (recommended by AST wiki)
-%bcond_with	opencore_amr	# disable opencore-arm support (recommended by AST wiki)
+%bcond_with	video		# enable video support (AST wiki suggests disabling it)
+%bcond_with	resample	# enable resample support (AST wiki suggests disabling it)
+%bcond_with	opencore_amr	# enable opencore-arm support (AST wiki suggests disabling it)
 
 # from ./version.mak
 %define version_base 2.1.0
