@@ -1,9 +1,10 @@
 #
-# NOTE:
-#	this is a Digium fork of pjproject, for Asterisk
-#	https://wiki.asterisk.org/wiki/display/AST/Installing+pjproject
-#	we should switch to upstream when the needed changes are merged there
+# NOTE: the package is prepared mainly for Asterisk needs, so it is configured
+# the way Asterisk wiki suggests:
+# https://wiki.asterisk.org/wiki/display/AST/Building+and+Installing+pjproject
 #
+# If we have another package using this library we may need to change bcond
+# defaults.
 #
 # TODO:
 #	- fix --with opencore_amr
@@ -11,28 +12,20 @@
 #
 
 # Conditional build:
-%bcond_without	sound		# disable sound support (recommended by AST wiki)
+%bcond_with	sound		# enable sound support (AST wiki suggests disabling it)
 %bcond_with	video		# enable video support (AST wiki suggests disabling it)
 %bcond_with	resample	# enable resample support (AST wiki suggests disabling it)
 %bcond_with	opencore_amr	# enable opencore-arm support (AST wiki suggests disabling it)
 
-# from ./version.mak
-%define version_base 2.1.0
-
-# from a commit at https://github.com/asterisk/pjproject
-%define snap_ts 20131114
-%define snap_hash 217740d99457fc8492d3a68f90fa25a52bd8eca9
-
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
-Version:	2.2.1_digium_%{snap_ts}
+Version:	2.3
 Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	https://github.com/asterisk/pjproject/archive/%{snap_hash}.tar.gz
-# Source0-md5:	b1d94fedf46f00b7e9fbaf8fa44cc652
-Patch0:		%{name}-avcodec.patch
-Patch1:		%{name}-ilbc-link.patch
+Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	8440e43242c439ae5ec30b5b85005fce
+Patch0:		%{name}-ilbc-link.patch
 URL:		http://www.pjsip.org/
 %{?with_video:BuildRequires:	SDL2-devel}
 BuildRequires:	SILK_SDK-devel
@@ -96,9 +89,8 @@ Static %{name} library.
 Statyczna biblioteka %{name}.
 
 %prep
-%setup -q -n %{name}-%{snap_hash}
+%setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__autoconf} -o configure aconfigure.ac
@@ -133,7 +125,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.txt
 %attr(755,root,root) %{_libdir}/libg7221codec.so.2
 %attr(755,root,root) %{_libdir}/libilbccodec.so.2
-%attr(755,root,root) %{_libdir}/libmilenage.so.2
 %attr(755,root,root) %{_libdir}/libpj.so.2
 %attr(755,root,root) %{_libdir}/libpjlib-util.so.2
 %attr(755,root,root) %{_libdir}/libpjmedia-audiodev.so.2
@@ -145,13 +136,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpjsip-ua.so.2
 %attr(755,root,root) %{_libdir}/libpjsip.so.2
 %attr(755,root,root) %{_libdir}/libpjsua.so.2
-%{?with_resample:%attr(755,root,root) %{_libdir}/libpjsua.so.2}
+%attr(755,root,root) %{_libdir}/libpjsua2.so.2
+%{?with_resample:%attr(755,root,root) %{_libdir}/libresample.so.2}
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libg7221codec.so
 %attr(755,root,root) %{_libdir}/libilbccodec.so
-%attr(755,root,root) %{_libdir}/libmilenage.so
 %attr(755,root,root) %{_libdir}/libpj.so
 %attr(755,root,root) %{_libdir}/libpjlib-util.so
 %attr(755,root,root) %{_libdir}/libpjmedia-audiodev.so
@@ -163,6 +154,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpjsip-ua.so
 %attr(755,root,root) %{_libdir}/libpjsip.so
 %attr(755,root,root) %{_libdir}/libpjsua.so
+%attr(755,root,root) %{_libdir}/libpjsua2.so
 %{?with_resample:%attr(755,root,root) %{_libdir}/libresample.so}
 %{_includedir}/pj*
 %{_pkgconfigdir}/lib%{name}.pc
@@ -171,7 +163,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libg7221codec-%{libsuffix}.a
 %{_libdir}/libilbccodec-%{libsuffix}.a
-%{_libdir}/libmilenage-%{libsuffix}.a
 %{_libdir}/libpj-%{libsuffix}.a
 %{_libdir}/libpjlib-util-%{libsuffix}.a
 %{_libdir}/libpjmedia-audiodev-%{libsuffix}.a
@@ -183,4 +174,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpjsip-simple-%{libsuffix}.a
 %{_libdir}/libpjsip-ua-%{libsuffix}.a
 %{_libdir}/libpjsua-%{libsuffix}.a
+%{_libdir}/libpjsua2-%{libsuffix}.a
 %{?with_resample:%{_libdir}/libresample-%{libsuffix}.a}
