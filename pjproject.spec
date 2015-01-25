@@ -47,6 +47,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python-modules
 BuildRequires:	rpmbuild(macros) >= 1.583
 BuildRequires:	speex-devel
+BuildRequires:	speexdsp-devel
 BuildRequires:	srtp-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
