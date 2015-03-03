@@ -103,6 +103,7 @@ Statyczna biblioteka %{name}.
 	%{__enable_disable resample resample} \
 	%{__enable_disable opencore_amr opencore-amr} \
 	%{__with sound external-pa} \
+	--without-libyuv \
 	--with-external-speex \
 	--with-external-srtp \
 	--with-external-gsm
