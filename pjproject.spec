@@ -20,7 +20,7 @@
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
 Version:	2.3
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
@@ -47,7 +47,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # dependency loop between libpjmedia-videodev.so and libpjmedia.so
 %define		skip_post_check_so	libpjmedia-videodev.so.*
 
+%ifarch x32
+%define		libsuffix	x86_64-pld-linux-gnux32
+%else
 %define		libsuffix	%{_arch}-pld-linux-gnu
+%endif
 
 %description
 PJSIP is a free and open source multimedia communication library
