@@ -19,12 +19,12 @@
 
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
-Version:	2.4
-Release:	3
+Version:	2.4.5
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	39629ca3fcedbdc7dbd8c5a707060095
+# Source0-md5:	f58b3485977b3a700256203a554b3869
 Patch0:		%{name}-ilbc-link.patch
 URL:		http://www.pjsip.org/
 %{?with_video:BuildRequires:	SDL2-devel}
