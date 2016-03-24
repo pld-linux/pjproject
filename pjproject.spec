@@ -20,7 +20,7 @@
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
 Version:	2.4.5
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
@@ -101,7 +101,7 @@ Statyczna biblioteka %{name}.
 %{__autoconf} -o configure aconfigure.ac
 
 %configure \
-	CFLAGS="%{rpmcflags} %{?with_video:-DPJMEDIA_HAS_VIDEO=1}" \
+	CFLAGS="%{rpmcflags} -DNDEBUG=1 %{?with_video:-DPJMEDIA_HAS_VIDEO=1}" \
 	--enable-shared \
 	%{__enable_disable sound sound} \
 	%{__enable_disable video video} \
