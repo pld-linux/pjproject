@@ -20,13 +20,21 @@
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
 Version:	2.5.5
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	183f7144b9aa238884243c0fc52ece36
 Source1:	config_site.h
 Patch0:		%{name}-ilbc-link.patch
+# patches from Asterisk
+Patch100:	0001-r5397-pjsip_generic_array_max_count.patch
+Patch101:	0001-r5400-pjsip_tx_data_dec_ref.patch
+Patch102:	0002-Fix-1946-Avoid-deinitialization-of-uninitialized-cli.patch
+Patch103:	0002-r5435-add-pjsip_inv_session-ref_cnt.patch
+Patch104:	0003-r5403-pjsip_IPV6_V6ONLY.patch
+Patch105:	0004-resolver.c-Prevent-SERVFAIL-from-marking-name-server.patch
+Patch106:	0005-Re-1969-Fix-crash-on-using-an-already-destroyed-SSL-.patch
 URL:		http://www.pjsip.org/
 %{?with_video:BuildRequires:	SDL2-devel}
 BuildRequires:	SILK_SDK-devel
@@ -97,6 +105,14 @@ Statyczna biblioteka %{name}.
 %prep
 %setup -q
 %patch0 -p1
+
+%patch100 -p1
+%patch101 -p1
+%patch102 -p1
+%patch103 -p1
+%patch104 -p1
+%patch105 -p1
+%patch106 -p1
 
 cp -p %{SOURCE1} pjlib/include/pj/config_site.h
 
