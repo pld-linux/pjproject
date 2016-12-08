@@ -44,3 +44,12 @@
 /* Defaults too low for WebRTC */
 #define PJ_ICE_MAX_CAND 32
 #define PJ_ICE_MAX_CHECKS (PJ_ICE_MAX_CAND * 2)
+
+/*
+ * Do not ever enable PJ_HASH_USE_OWN_TOLOWER because the algorithm is
+ * inconsistently used when calculating the hash value and doesn't
+ * convert the same characters as pj_tolower()/tolower().  Thus you
+ * can get different hash values if the string hashed has certain
+ * characters in it.  (ASCII '@', '[', '\\', ']', '^', and '_')
+ */
+#undef PJ_HASH_USE_OWN_TOLOWER
