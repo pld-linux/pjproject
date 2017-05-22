@@ -20,7 +20,7 @@
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
 Version:	2.6
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
@@ -29,13 +29,13 @@ Source1:	config_site.h
 Patch0:		%{name}-ilbc-link.patch
 Patch1:		webrtc_build.patch
 # patches from Asterisk
-Patch100:	0001-r5397-pjsip_generic_array_max_count.patch
-Patch101:	0001-r5400-pjsip_tx_data_dec_ref.patch
-Patch102:	0002-Fix-1946-Avoid-deinitialization-of-uninitialized-cli.patch
-Patch103:	0002-r5435-add-pjsip_inv_session-ref_cnt.patch
-Patch104:	0003-r5403-pjsip_IPV6_V6ONLY.patch
-Patch105:	0004-resolver.c-Prevent-SERVFAIL-from-marking-name-server.patch
-Patch106:	0005-Re-1969-Fix-crash-on-using-an-already-destroyed-SSL-.patch
+Patch100:	0010-evsub-Add-pjsip_evsub_set_uas_timeout.patch
+Patch101:	0011-r5554-svn-backport-Increase-SENDER_WIDTH-column-size.patch
+Patch102:	0013-r5559-svn-backport-Fix-to-resolve-DNS-SRV-crashes.patch
+Patch103:	0014-Add-pjsip-transport-register-type-ipv6.patch
+Patch104:	0025-fix-print-xml-crash.patch
+Patch105:	0058-Parse-zero-length-multipart-body-parts-correctly.patch
+Patch106:	0059-Ensure-2543-transaction-key-buffer-is-large-enough.patch
 URL:		http://www.pjsip.org/
 %{?with_video:BuildRequires:	SDL2-devel}
 BuildRequires:	SILK_SDK-devel
@@ -109,13 +109,13 @@ Statyczna biblioteka %{name}.
 %patch0 -p1
 %patch1 -p1
 
-#%patch100 -p1
-#%patch101 -p1
-#%patch102 -p1
-#%patch103 -p1
-#%patch104 -p1
-#%patch105 -p1
-#%patch106 -p1
+%patch100 -p1
+%patch101 -p1
+%patch102 -p1
+%patch103 -p1
+%patch104 -p1
+%patch105 -p1
+%patch106 -p1
 
 cp -p %{SOURCE1} pjlib/include/pj/config_site.h
 
