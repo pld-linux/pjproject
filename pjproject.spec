@@ -19,14 +19,15 @@
 
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
-Version:	2.5.5
-Release:	3
+Version:	2.6
+Release:	0.1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	183f7144b9aa238884243c0fc52ece36
+# Source0-md5:	c347a672679e7875ce572e18517884b2
 Source1:	config_site.h
 Patch0:		%{name}-ilbc-link.patch
+Patch1:		webrtc_build.patch
 # patches from Asterisk
 Patch100:	0001-r5397-pjsip_generic_array_max_count.patch
 Patch101:	0001-r5400-pjsip_tx_data_dec_ref.patch
@@ -51,6 +52,7 @@ BuildRequires:	rpmbuild(macros) >= 1.583
 BuildRequires:	speex-devel
 BuildRequires:	speexdsp-devel
 BuildRequires:	srtp-devel
+BuildRequires:	webrtc-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # dependency loop between libpjmedia-videodev.so and libpjmedia.so
@@ -105,14 +107,15 @@ Statyczna biblioteka %{name}.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
-%patch100 -p1
-%patch101 -p1
-%patch102 -p1
-%patch103 -p1
-%patch104 -p1
-%patch105 -p1
-%patch106 -p1
+#%patch100 -p1
+#%patch101 -p1
+#%patch102 -p1
+#%patch103 -p1
+#%patch104 -p1
+#%patch105 -p1
+#%patch106 -p1
 
 cp -p %{SOURCE1} pjlib/include/pj/config_site.h
 
@@ -164,6 +167,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpjsua.so.2
 %attr(755,root,root) %{_libdir}/libpjsua2.so.2
 %{?with_resample:%attr(755,root,root) %{_libdir}/libresample.so.2}
+%attr(755,root,root) %{_libdir}/libwebrtc.so.2
 
 %files devel
 %defattr(644,root,root,755)
@@ -182,6 +186,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpjsua.so
 %attr(755,root,root) %{_libdir}/libpjsua2.so
 %{?with_resample:%attr(755,root,root) %{_libdir}/libresample.so}
+%attr(755,root,root) %{_libdir}/libwebrtc.so
 %{_includedir}/pj*
 %{_pkgconfigdir}/lib%{name}.pc
 
@@ -202,3 +207,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpjsua-%{libsuffix}.a
 %{_libdir}/libpjsua2-%{libsuffix}.a
 %{?with_resample:%{_libdir}/libresample-%{libsuffix}.a}
+%{_libdir}/libwebrtc-%{libsuffix}.a

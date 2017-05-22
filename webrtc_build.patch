@@ -1,0 +1,20 @@
+diff -dur pjproject-2.6.orig/third_party/build/webrtc/Makefile pjproject-2.6/third_party/build/webrtc/Makefile
+--- pjproject-2.6.orig/third_party/build/webrtc/Makefile	2016-08-25 03:36:33.000000000 +0200
++++ pjproject-2.6/third_party/build/webrtc/Makefile	2017-05-22 14:30:58.000000000 +0200
+@@ -25,7 +25,7 @@
+ export _LDFLAGS := $(CC_LDFLAGS) $(OS_LDFLAGS) $(M_LDFLAGS) $(HOST_LDFLAGS) \
+ 		   $(LDFLAGS) 
+ 
+-export WEBRTC_SRCDIR = ../../webrtc/src/webrtc/
++export WEBRTC_SRCDIR = ../../webrtc/src/webrtc
+ export WEBRTC_OBJS = \
+ 	modules/audio_processing/aec/aec_core.o                    \
+ 	modules/audio_processing/aec/aec_rdft.o                    \
+@@ -61,6 +61,7 @@
+ 
+ export WEBRTC_CFLAGS = $(_CFLAGS) $(WEBRTC_OTHER_CFLAGS)
+ export WEBRTC_CXXFLAGS = $(WEBRTC_CFLAGS)
++export WEBRTC_LDFLAGS = -lm -lpthread
+ 
+ 
+ export CC_OUT CC AR RANLIB HOST_MV HOST_RM HOST_RMDIR HOST_MKDIR OBJEXT LD LDOUT 
