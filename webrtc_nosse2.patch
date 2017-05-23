@@ -1,0 +1,48 @@
+diff -dur -x '*~' pjproject-2.6.orig/aconfigure.ac pjproject-2.6/aconfigure.ac
+--- pjproject-2.6.orig/aconfigure.ac	2017-01-25 12:23:08.000000000 +0100
++++ pjproject-2.6/aconfigure.ac	2017-05-23 10:46:01.605434804 +0200
+@@ -1840,7 +1840,7 @@
+ 			ac_webrtc_cflags="-msse2"
+ 			;;
+ 		     *win32* | *w32* | *darwin* | *linux*)
+-			ac_webrtc_instset=sse2
++			ac_webrtc_instset=generic
+ 			;;
+ 		     *)
+ 			;;
+diff -dur -x '*~' pjproject-2.6.orig/third_party/build/os-auto.mak.in pjproject-2.6/third_party/build/os-auto.mak.in
+--- pjproject-2.6.orig/third_party/build/os-auto.mak.in	2016-12-22 10:33:55.000000000 +0100
++++ pjproject-2.6/third_party/build/os-auto.mak.in	2017-05-23 10:46:01.605434804 +0200
+@@ -105,7 +105,7 @@
+     WEBRTC_SRC = \
+ 	      modules/audio_processing/aecm/aecm_core_c.o                \
+ 	      modules/audio_processing/ns/nsx_core_c.o                   \
+-	      common_audio/signal_processing/complex_fft.o
++	      system_wrappers/source/cpu_features.o
+ endif
+ endif
+ endif
+diff -dur -x '*~' pjproject-2.6.orig/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_core.c pjproject-2.6/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_core.c
+--- pjproject-2.6.orig/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_core.c	2016-08-29 10:44:54.000000000 +0200
++++ pjproject-2.6/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_core.c	2017-05-23 10:46:01.608768302 +0200
+@@ -1478,7 +1478,7 @@
+   WebRtcAec_ComfortNoise = ComfortNoise;
+   WebRtcAec_SubbandCoherence = SubbandCoherence;
+ 
+-#if defined(WEBRTC_ARCH_X86_FAMILY)
++#if defined(WEBRTC_ARCH_X86_FAMILY) && defined(__SSE2__)
+   if (WebRtc_GetCPUInfo(kSSE2)) {
+     WebRtcAec_InitAec_SSE2();
+   }
+diff -dur -x '*~' pjproject-2.6.orig/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_rdft.c pjproject-2.6/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_rdft.c
+--- pjproject-2.6.orig/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_rdft.c	2016-08-25 03:36:33.000000000 +0200
++++ pjproject-2.6/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_rdft.c	2017-05-23 10:46:35.280427426 +0200
+@@ -571,7 +571,7 @@
+   cftfsub_128 = cftfsub_128_C;
+   cftbsub_128 = cftbsub_128_C;
+   bitrv2_128 = bitrv2_128_C;
+-#if defined(WEBRTC_ARCH_X86_FAMILY)
++#if defined(WEBRTC_ARCH_X86_FAMILY) && defined(__SSE2__)
+   if (WebRtc_GetCPUInfo(kSSE2)) {
+     aec_rdft_init_sse2();
+   }

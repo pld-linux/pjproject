@@ -28,6 +28,7 @@ Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
 Source1:	config_site.h
 Patch0:		%{name}-ilbc-link.patch
 Patch1:		webrtc_build.patch
+Patch2:		webrtc_nosse2.patch
 # patches from Asterisk
 Patch100:	0010-evsub-Add-pjsip_evsub_set_uas_timeout.patch
 Patch101:	0011-r5554-svn-backport-Increase-SENDER_WIDTH-column-size.patch
@@ -117,6 +118,10 @@ Statyczna biblioteka %{name}.
 %patch106 -p1
 
 cp -p %{SOURCE1} pjlib/include/pj/config_site.h
+
+%ifarch i686
+%patch2 -p1
+%endif
 
 %build
 %{__autoconf} -o configure aconfigure.ac
