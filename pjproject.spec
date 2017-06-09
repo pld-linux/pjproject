@@ -20,7 +20,7 @@
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
 Version:	2.6
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
@@ -35,8 +35,12 @@ Patch101:	0011-r5554-svn-backport-Increase-SENDER_WIDTH-column-size.patch
 Patch102:	0013-r5559-svn-backport-Fix-to-resolve-DNS-SRV-crashes.patch
 Patch103:	0014-Add-pjsip-transport-register-type-ipv6.patch
 Patch104:	0025-fix-print-xml-crash.patch
-Patch105:	0058-Parse-zero-length-multipart-body-parts-correctly.patch
-Patch106:	0059-Ensure-2543-transaction-key-buffer-is-large-enough.patch
+Patch105:	0035-r5572-svn-backport-dialog-transaction-deadlock.patch
+Patch106:	0036-r5573-svn-backport-ua-pjsua-transaction-deadlock.patch
+Patch107:	0037-r5576-svn-backport-session-timer-crash.patch
+Patch108:	0048-r5576-svn-backport-tls-crash.patch
+Patch109:	0058-Parse-zero-length-multipart-body-parts-correctly.patch
+Patch110:	0059-Ensure-2543-transaction-key-buffer-is-large-enough.patch
 URL:		http://www.pjsip.org/
 %{?with_video:BuildRequires:	SDL2-devel}
 BuildRequires:	SILK_SDK-devel
@@ -116,6 +120,10 @@ Statyczna biblioteka %{name}.
 %patch104 -p1
 %patch105 -p1
 %patch106 -p1
+%patch107 -p1
+%patch108 -p1
+%patch109 -p1
+%patch110 -p1
 
 cp -p %{SOURCE1} pjlib/include/pj/config_site.h
 
