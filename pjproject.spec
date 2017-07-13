@@ -20,7 +20,7 @@
 Summary:	PJSIP - free and open source multimedia communication library
 Name:		pjproject
 Version:	2.6
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://www.pjsip.org/release/%{version}/%{name}-%{version}.tar.bz2
@@ -41,6 +41,7 @@ Patch107:	0037-r5576-svn-backport-session-timer-crash.patch
 Patch108:	0048-r5576-svn-backport-tls-crash.patch
 Patch109:	0058-Parse-zero-length-multipart-body-parts-correctly.patch
 Patch110:	0059-Ensure-2543-transaction-key-buffer-is-large-enough.patch
+Patch111:	0070-Set-PJSIP_INV_SUPPORT_UPDATE-correctly-in-pjsip_inv_.patch
 URL:		http://www.pjsip.org/
 %{?with_video:BuildRequires:	SDL2-devel}
 BuildRequires:	SILK_SDK-devel
@@ -124,6 +125,7 @@ Statyczna biblioteka %{name}.
 %patch108 -p1
 %patch109 -p1
 %patch110 -p1
+%patch111 -p1
 
 cp -p %{SOURCE1} pjlib/include/pj/config_site.h
 
