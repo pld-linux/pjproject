@@ -61,7 +61,7 @@ BuildRequires:	python-modules
 BuildRequires:	rpmbuild(macros) >= 1.583
 BuildRequires:	speex-devel
 BuildRequires:	speexdsp-devel
-BuildRequires:	srtp-devel
+BuildRequires:	libsrtp2-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # dependency loop between libpjmedia-videodev.so and libpjmedia.so
